@@ -5,51 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BRUR Assignment Cover Page Generator</title>
     <link rel="stylesheet" href="lib/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-
 <body>
 
 <div class="form-container no-print" id="inputForm">
     <h2>BRUR Assignment Maker</h2>
-
     <div class="grid">
         <div class="input-group full-width">
             <label>Course Title:</label>
             <input type="text" id="courseTitle" placeholder="Digital Logic">
         </div>
-
         <div class="input-group">
             <label>Course Code:</label>
             <input type="text" id="courseCode" placeholder="CSE-2101">
         </div>
-
         <div class="input-group full-width">
             <label>Assignment Title:</label>
-            <input type="text" id="assignmentTitle" placeholder="e.g. Impact of AI in Modern Education">
+            <input type="text" id="assignmentTitle" placeholder="Impact of AI in Modern Education">
         </div>
-
         <div class="input-group">
             <label>Student's Department</label>
             <select id="studentDept">
                 <option value="Computer Science and Engineering">CSE</option>
+                <option value="Electrical and Electronic Engineering">EEE</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physics">Physics</option>
             </select>
         </div>
-
         <div class="input-group">
             <label>Student's Name:</label>
             <input type="text" id="studentName" placeholder="Alif">
         </div>
-
         <div class="input-group">
             <label>Student's ID:</label>
             <input type="text" id="studentID" placeholder="1230XXXXXX">
         </div>
-
         <div class="input-group">
             <label>Registration Number:</label>
             <input type="text" id="regNo" placeholder="123456789">
         </div>
-
         <div class="input-group">
             <label>Year</label>
             <select id="year">
@@ -59,7 +55,6 @@
                 <option value="4th Year">4th Year</option>
             </select>
         </div>
-
         <div class="input-group">
             <label>Semester</label>
             <select id="semester">
@@ -67,7 +62,6 @@
                 <option value="2nd Semester">2nd Semester</option>
             </select>
         </div>
-
         <div class="input-group">
             <label>Session</label>
             <select id="session">
@@ -76,12 +70,10 @@
                 <option value="2024-2025">2024-2025</option>
             </select>
         </div>
-
         <div class="input-group full-width">
-            <label>Submitted To (Teacher's Name):</label>
-            <input type="text" id="teacherName" placeholder="Dr. Md. Abul Kalam Azad">
+            <label>Teacher's Name:</label>
+            <input type="text" id="teacherName" placeholder="Dr. Md. Abul Kalam">
         </div>
-
         <div class="input-group">
             <label>Teacher's Designation:</label>
             <select id="teacherDesignation">
@@ -91,7 +83,6 @@
                 <option value="Lecturer">Lecturer</option>
             </select>
         </div>
-
         <div class="input-group">
             <label>Teacher's Department:</label>
             <select id="teacherDept">
@@ -99,37 +90,34 @@
                 <option value="Electrical and Electronic Engineering">EEE</option>
                 <option value="Mathematics">Mathematics</option>
                 <option value="Physics">Physics</option>
-                <option value="Management Information Systems">MIS</option>
             </select>
         </div>
-
         <div class="input-group full-width">
             <label>Submission Date:</label>
             <input type="date" id="subDate">
         </div>
     </div>
-
-    <button id="generateBtn">Generate Cover Page</button>
+    <button id="generateBtn">Download PDF</button>
 </div>
 
 <div id="printable-area" style="display: none;">
     <div class="page-border">
         <div class="header">
             <div class="uni-name">BEGUM ROKEYA UNIVERSITY, RANGPUR</div>
-            <img src="https://github.com/With-ALIF/logo_zone/blob/main/education/brur_optimized.png?raw=true" class="logo" alt="BRUR Logo">
+            <img class="logo" alt="BRUR Logo">
             <div class="assignment-label">ASSIGNMENT ON</div>
-            <div id="pAssignmentTitle" style="font-size: 24px; font-weight: bold; margin-top: 10px; font-family: 'Times New Roman', serif;"></div>
+            <div id="pAssignmentTitle" class="assignment-title">Your Assignment Topic Here</div>
         </div>
 
-        <div class="course-section">
+        <div class="course-info">
             <p><strong>Course Code:</strong> <span id="pCourseCode"></span></p>
             <p><strong>Course Title:</strong> <span id="pCourseTitle"></span></p>
         </div>
 
-        <div class="info-container">
+        <div class="info-boxes">
             <div class="info-box">
-                <div class="box-label">SUBMITTED BY</div>
-                <div class="box-container">
+                <div class="box-header">SUBMITTED BY</div>
+                <div class="box-content">
                     <p><strong>Name:</strong> <span id="pStudentName"></span></p>
                     <p><strong>ID:</strong> <span id="pStudentID"></span></p>
                     <p><strong>Registration No:</strong> <span id="pRegNo"></span></p>
@@ -142,8 +130,8 @@
             </div>
 
             <div class="info-box">
-                <div class="box-label">SUBMITTED TO</div>
-                <div class="box-container">
+                <div class="box-header">SUBMITTED TO</div>
+                <div class="box-content">
                     <p><span id="pTeacherName"></span></p>
                     <p><span id="pTeacherDesignation"></span></p>
                     <p><strong>Department of</strong> <span id="pTeacherDept"></span></p>
@@ -153,17 +141,11 @@
         </div>
 
         <div class="date-section">
-            <div class="date-box">
-                Submitted Date: <span id="pSubDate"></span>
-            </div>
-        </div>
-
-        <div class="no-print action-buttons">
-            <button onclick="window.print()" class="btn-print">Download PDF / Print</button>
-            <button onclick="backToEdit()" class="btn-edit">Edit Info</button>
+            <div class="date-box">Submitted Date: <span id="pSubDate">Not Set</span></div>
         </div>
     </div>
 </div>
-    <script src="lib/script.js"></script>
+
+<script src="lib/script.js"></script>
 </body>
 </html>
