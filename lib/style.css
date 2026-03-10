@@ -280,3 +280,25 @@ label {
         margin: 0;
     }
 }
+
+.footer{
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color: #fff;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+}
+
+.footer p{
+    margin: 0;
+    font-weight: 500;
+}
+
+.footer p::before{
+    content: "© ";
+}

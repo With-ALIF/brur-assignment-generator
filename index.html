@@ -39,7 +39,6 @@
             <div class="input-group">
                 <label>Student's Department</label>
                 <select id="studentDept">
-                    <option value="Computer Science and Engineering">CSE</option>
                 </select>
             </div>
             <div class="input-group">
@@ -73,14 +72,23 @@
             <div class="input-group">
                 <label>Session</label>
                 <select id="session">
+                    <option value="2021-2022">2021-2022</option>
                     <option value="2022-2023">2022-2023</option>
                     <option value="2023-2024" selected>2023-2024</option>
                     <option value="2024-2025">2024-2025</option>
                 </select>
             </div>
+
+            <div class="input-group full-width">
+                <label>Teacher's Department:</label>
+                <select id="teacherDept">
+                </select>
+            </div>
             <div class="input-group full-width">
                 <label>Teacher's Name:</label>
-                <input type="text" id="teacherName" placeholder="Dr. Md. Abul Kalam">
+                <select id="teacherName">
+                    <option value="">-- Select Teacher's Department First --</option>
+                </select>
             </div>
             <div class="input-group">
                 <label>Teacher's Designation:</label>
@@ -91,16 +99,7 @@
                     <option value="Lecturer">Lecturer</option>
                 </select>
             </div>
-            <div class="input-group">
-                <label>Teacher's Department:</label>
-                <select id="teacherDept">
-                    <option value="Computer Science and Engineering">CSE</option>
-                    <option value="Electrical and Electronic Engineering">EEE</option>
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Physics">Physics</option>
-                    <option value="Management Information System">MIS</option>
-                </select>
-            </div>
+
             <div class="input-group full-width">
                 <label>Submission Date:</label>
                 <input type="date" id="subDate">
@@ -155,6 +154,13 @@
         </div>
     </div>
 
+     <div>
+        <footer class="footer no-print">
+            <p>Developed by Alif | BRUR CSE 16</p>
+        </footer>
+    </div>
+    
+    <script src="lib/data.js"></script>
     <script src="lib/script.js"></script>
 </body>
 
