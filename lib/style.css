@@ -171,21 +171,33 @@ label {
     flex-grow: 1;
 }
 
+.template-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#studentDept, #teacherDept {
+            width: 100%;
+        }
+
 .template-btn {
-    padding: 0 15px;
+    flex: 1;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
     color: white;
     background-color: #27ae60;
     cursor: pointer;
     font-weight: 600;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
 .btn-delete {
     background-color: #e74c3c;
 }
-
 #generateBtn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
@@ -346,7 +358,7 @@ label {
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .input-group input, 
