@@ -14,97 +14,124 @@
 
     <div class="form-container no-print" id="inputForm">
         <h2>BRUR Cover Maker</h2>
-        <div class="grid">
-            <div class="input-group full-width">
-                <label>Document Type:</label>
-                <select id="documentType">
-                    <option value="ASSIGNMENT ON">Assignment</option>
-                    <option value="LAB REPORT">Lab Report</option>
-                </select>
-            </div>
 
-            <div class="input-group full-width">
-                <label>Course Title:</label>
-                <input type="text" id="courseTitle" placeholder="Digital Logic">
-            </div>
-            <div class="input-group">
-                <label>Course Code:</label>
-                <input type="text" id="courseCode" placeholder="CSE-2101">
-            </div>
-            <div class="input-group full-width">
-                <label>Assignment Title:</label>
-                <textarea id="assignmentTitle" rows="3" placeholder="Impact of AI in Modern Education"></textarea>
-            </div>
+        <fieldset class="form-section">
+            <legend>Document Information</legend>
+            <div class="grid">
+                <div class="input-group full-width">
+                    <label for="documentType">Document Type:</label>
+                    <select id="documentType">
+                        <option value="ASSIGNMENT ON">Assignment</option>
+                        <option value="LAB REPORT">Lab Report</option>
+                    </select>
+                </div>
 
-            <div class="input-group">
-                <label>Student's Department</label>
-                <select id="studentDept">
-                </select>
+                <div class="input-group full-width">
+                    <label for="courseTitle">Course Title:</label>
+                    <input type="text" id="courseTitle" placeholder="Digital Logic">
+                </div>
+                <div class="input-group">
+                    <label for="courseCode">Course Code:</label>
+                    <input type="text" id="courseCode" placeholder="CSE-2101">
+                </div>
+                <div class="input-group full-width">
+                    <label for="assignmentTitle">Assignment Title:</label>
+                    <textarea id="assignmentTitle" rows="3" placeholder="Impact of AI in Modern Education"></textarea>
+                </div>
+                <div class="input-group full-width">
+                    <label for="subDate">Submission Date:</label>
+                    <input type="date" id="subDate">
+                </div>
             </div>
-            <div class="input-group">
-                <label>Student's Name:</label>
-                <input type="text" id="studentName" placeholder="Alif">
-            </div>
-            <div class="input-group">
-                <label>Student's ID:</label>
-                <input type="text" id="studentID" placeholder="1230XXXXXX">
-            </div>
-            <div class="input-group">
-                <label>Registration Number:</label>
-                <input type="text" id="regNo" placeholder="123456789">
-            </div>
-            <div class="input-group">
-                <label>Year</label>
-                <select id="year">
-                    <option value="1st Year">1st Year</option>
-                    <option value="2nd Year" selected>2nd Year</option>
-                    <option value="3rd Year">3rd Year</option>
-                    <option value="4th Year">4th Year</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>Semester</label>
-                <select id="semester">
-                    <option value="1st Semester">1st Semester</option>
-                    <option value="2nd Semester">2nd Semester</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>Session</label>
-                <select id="session">
-                    <option value="2021-2022">2021-2022</option>
-                    <option value="2022-2023">2022-2023</option>
-                    <option value="2023-2024" selected>2023-2024</option>
-                    <option value="2024-2025">2024-2025</option>
-                </select>
-            </div>
+        </fieldset>
 
-            <div class="input-group full-width">
-                <label>Teacher's Department:</label>
-                <select id="teacherDept">
-                </select>
-            </div>
-            <div class="input-group full-width">
-                <label>Teacher's Name:</label>
-                <select id="teacherName">
-                    <option value="">-- Select Teacher's Department First --</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>Teacher's Designation:</label>
-                <select id="teacherDesignation">
-                    <option value="Professor">Professor</option>
-                    <option value="Associate Professor">Associate Professor</option>
-                    <option value="Assistant Professor">Assistant Professor</option>
-                    <option value="Lecturer">Lecturer</option>
-                </select>
-            </div>
+        <fieldset class="form-section">
+            <legend>Student Information</legend>
+            <div class="grid">
+                <div class="input-group full-width">
+                    <label for="studentTemplate">Student Template:</label>
+                    <div class="template-manager">
+                        <select id="studentTemplate">
+                            <option value="">-- Select a Student --</option>
+                        </select>
+                        <button id="saveStudentBtn" class="template-btn">Save</button>
+                        <button id="deleteStudentBtn" class="template-btn btn-delete">Delete</button>
+                    </div>
+                </div>
 
-            <div class="input-group full-width">
-                <label>Submission Date:</label>
-                <input type="date" id="subDate">
+                <div class="input-group full-width">
+                    <label for="studentDept">Student's Department:</label>
+                    <select id="studentDept">
+                    </select>
+                </div>
+                <div class="input-group full-width">
+                    <label for="studentName">Student's Name:</label>
+                    <input type="text" id="studentName" placeholder="Alif">
+                </div>
+                <div class="input-group">
+                    <label for="studentID">Student's ID:</label>
+                    <input type="text" id="studentID" placeholder="1230XXXX">
+                </div>
+                <div class="input-group">
+                    <label for="regNo">Registration Number:</label>
+                    <input type="text" id="regNo" placeholder="0000 18xxxx">
+                </div>
+                <div class="input-group">
+                    <label for="year">Year:</label>
+                    <select id="year">
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year" selected>2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="semester">Semester:</label>
+                    <select id="semester">
+                        <option value="1st Semester">1st Semester</option>
+                        <option value="2nd Semester">2nd Semester</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="session">Session:</label>
+                    <select id="session">
+                        <option value="2020-2021">2020-2021</option>
+                        <option value="2021-2022">2021-2022</option>
+                        <option value="2022-2023">2022-2023</option>
+                        <option value="2023-2024" selected>2023-2024</option>
+                        <option value="2024-2025">2024-2025</option>
+                        <option value="2025-2026">2025-2026</option>
+                    </select>
+                </div>
             </div>
-        </div>
+        </fieldset>
+
+        <fieldset class="form-section">
+            <legend>Teacher Information</legend>
+            <div class="grid">
+                <div class="input-group full-width">
+                    <label for="teacherDept">Teacher's Department:</label>
+                    <select id="teacherDept">
+                    </select>
+                </div>
+                <div class="input-group full-width">
+                    <label for="teacherName">Teacher's Name:</label>
+                    <select id="teacherName">
+                        <option value="">-- Select Teacher's Department First --</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="teacherDesignation">Teacher's Designation:</label>
+                    <select id="teacherDesignation">
+                        <option value="Professor">Professor</option>
+                        <option value="Associate Professor">Associate Professor</option>
+                        <option value="Assistant Professor">Assistant Professor</option>
+                        <option value="Lecturer">Lecturer</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        
         <button id="generateBtn">Download PDF</button>
     </div>
 
@@ -154,12 +181,9 @@
         </div>
     </div>
 
-     <div>
-        <footer class="footer no-print">
-            <p>Developed by Alif | BRUR CSE 16</p>
-        </footer>
-    </div>
-    
+    <footer class="footer no-print">
+        <p>Developed by <a href="https://alif.mnr.bd/" target="_blank" rel="noopener noreferrer">Alif</a> | BRUR CSE 16</p>
+    </footer>
     <script src="lib/data.js"></script>
     <script src="lib/script.js"></script>
 </body>
