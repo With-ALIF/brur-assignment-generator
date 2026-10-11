@@ -8,6 +8,8 @@ It allows students to enter their assignment details and instantly generate a pr
 - Clean and professional BRUR-style design
 - Responsive form for all devices
 - Automatic preview of the cover page
+- Individual **or** Group Project submissions (dynamic multiple students)
+- Save/reuse student details as templates (per student)
 - Print-ready A4 layout
 - PDF download using browser print
 - Mobile, tablet, and desktop friendly
@@ -22,10 +24,12 @@ It allows students to enter their assignment details and instantly generate a pr
 ## How to Use
 
 1. Open the project in your browser.
-2. Fill in the assignment information in the form.
-3. Click **Generate Cover Page**.
-4. Preview the generated cover page.
-5. Click **Download PDF / Print** to save or print the cover page.
+2. Pick **Submitted By** — `Individual` or `Group Project`.
+3. In group mode, choose the number of students or click **+ Add Another Student** / **Remove**.
+4. Fill in the document information and teacher details.
+5. For each student card, either type the details or pick a saved template and click **Save** to store it for next time.
+6. Click **Download PDF**.
+7. The generated PDF is named after the student(s), e.g. `Assignment_Group_Alif_Rifat_Sadia.pdf`.
 
 
 ## Print Instructions

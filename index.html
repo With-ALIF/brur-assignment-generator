@@ -46,35 +46,39 @@
         </fieldset>
 
         <fieldset class="form-section">
+            <legend>Submission Type</legend>
+            <div class="grid" id="submissionTypeGrid">
+                <div class="input-group full-width" id="submissionTypeWrapper">
+                    <label for="submissionType">Submitted By:</label>
+                    <select id="submissionType">
+                        <option value="individual">Individual</option>
+                        <option value="group">Group Project</option>
+                    </select>
+                </div>
+                <div class="input-group" id="groupCountWrapper" style="display: none;">
+                    <label for="groupMemberCount">Number of Students:</label>
+                    <select id="groupMemberCount">
+                        <option value="2">2 Students</option>
+                        <option value="3" selected>3 Students</option>
+                        <option value="4">4 Students</option>
+                        <option value="5">5 Students</option>
+                        <option value="6">6 Students</option>
+                        <option value="7">7 Students</option>
+                        <option value="8">8 Students</option>
+                        <option value="9">9 Students</option>
+                        <option value="10">10 Students</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="form-section">
             <legend>Student Information</legend>
             <div class="grid">
-                <div class="input-group full-width">
-                    <label for="studentTemplate">Student Template:</label>
-                    <select id="studentTemplate">
-                        <option value="">-- Select a Student --</option>
-                    </select>
-                    <div class="template-buttons">
-                        <button id="saveStudentBtn" class="template-btn">Save</button>
-                        <button id="deleteStudentBtn" class="template-btn btn-delete">Delete</button>
-                    </div>
-                </div>
-
                 <div class="input-group full-width">
                     <label for="studentDept">Student's Department:</label>
                     <select id="studentDept">
                     </select>
-                </div>
-                <div class="input-group full-width">
-                    <label for="studentName">Student's Name:</label>
-                    <input type="text" id="studentName" placeholder="Alif">
-                </div>
-                <div class="input-group">
-                    <label for="studentID">Student's ID:</label>
-                    <input type="text" id="studentID" placeholder="1230XXXX">
-                </div>
-                <div class="input-group">
-                    <label for="regNo">Registration Number:</label>
-                    <input type="text" id="regNo" placeholder="0000 18xxxx">
                 </div>
                 <div class="input-group">
                     <label for="year">Year:</label>
@@ -92,7 +96,7 @@
                         <option value="2nd Semester">2nd Semester</option>
                     </select>
                 </div>
-                <div class="input-group">
+                <div class="input-group full-width">
                     <label for="session">Session:</label>
                     <select id="session">
                         <option value="2020-2021">2020-2021</option>
@@ -103,6 +107,11 @@
                         <option value="2025-2026">2025-2026</option>
                     </select>
                 </div>
+            </div>
+
+            <div id="studentCards"></div>
+            <div id="groupActions" style="display: none;">
+                <button type="button" id="addStudentBtn" class="add-student-btn">+ Add Another Student</button>
             </div>
         </fieldset>
 
@@ -151,11 +160,23 @@
 
             <div class="info-boxes">
                 <div class="info-box">
-                    <div class="box-header">SUBMITTED BY</div>
+                    <div class="box-header" id="pSubmittedByHeader">SUBMITTED BY</div>
                     <div class="box-content">
-                        <p><strong>Name:</strong> <span id="pStudentName"></span></p>
-                        <p><strong>ID:</strong> <span id="pStudentID"></span></p>
-                        <p><strong>Registration No:</strong> <span id="pRegNo"></span></p>
+                        <div id="pIndividualBlock">
+                            <p><strong>Name:</strong> <span id="pStudentName"></span></p>
+                            <p><strong>ID:</strong> <span id="pStudentID"></span></p>
+                            <p><strong>Registration No:</strong> <span id="pRegNo"></span></p>
+                        </div>
+                        <table id="pGroupTable" class="group-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>Registration No</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pGroupTableBody"></tbody>
+                        </table>
                         <p><strong>Year:</strong> <span id="pYear"></span></p>
                         <p><strong>Semester:</strong> <span id="pSemester"></span></p>
                         <p><strong>Session:</strong> <span id="pSession"></span></p>

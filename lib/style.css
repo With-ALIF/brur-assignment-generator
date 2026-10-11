@@ -198,6 +198,136 @@ label {
 .btn-delete {
     background-color: #e74c3c;
 }
+
+.student-card {
+    border: 2px dashed #cfd3e0;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 18px;
+    background-color: #fbfbfe;
+}
+
+.student-card:last-child {
+    margin-bottom: 0;
+}
+
+.student-card .grid {
+    margin-bottom: 0;
+}
+
+.student-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e8e8f2;
+}
+
+.student-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #764ba2;
+    letter-spacing: 0.5px;
+}
+
+.btn-remove-member {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-remove-member:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+}
+
+.add-student-btn {
+    width: 100%;
+    padding: 12px;
+    background: #f0f4ff;
+    color: #4f46e5;
+    border: 2px dashed #818cf8;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-student-btn:hover {
+    background: #e0e7ff;
+    border-color: #4f46e5;
+    color: #3730a3;
+    transform: translateY(-1px);
+}
+
+#studentCards {
+    margin-top: 5px;
+}
+
+.group-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0 14px 0;
+    display: none;
+}
+
+.group-table th,
+.group-table td {
+    border: 1px solid #000;
+    padding: 7px 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: left;
+    word-break: normal;
+    overflow-wrap: break-word;
+    vertical-align: top;
+}
+
+.group-table.compact-table th,
+.group-table.compact-table td {
+    padding: 4px 5px;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.group-table.compact-table-mini th,
+.group-table.compact-table-mini td {
+    padding: 2px 4px;
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.group-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.group-table td:first-child {
+    width: 38%;
+}
+
+.group-table td:nth-child(2) {
+    width: 25%;
+    white-space: nowrap;
+}
+
 #generateBtn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
