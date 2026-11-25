@@ -109,12 +109,11 @@ export default function PreviewStage({
               <img className="logo" alt="BRUR Logo" src={LOGO_PATH} />
               <div className="uni">{UNI}</div>
               <div className="dep">{ph(deptDisplay, "Department name")}</div>
-              <hr className="rule" />
 
               <div className="dtype">{docTypeTitle}</div>
 
               {formData.topic && (
-                <div className="topic">Topic: {formData.topic}</div>
+                <div className="topic">{formData.topic}</div>
               )}
 
               <div className="course">

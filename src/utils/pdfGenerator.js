@@ -163,7 +163,7 @@ export function buildPdf(m, logo, ratio = LOGO_RATIO) {
   doc.text(typeText, cx, top + 9.6, { align: "center" });
   y = top + 14;
 
-  if (m.topic) y = centered("Topic: " + m.topic, y + 11, 13.5, "normal", 145);
+  if (m.topic) y = centered(m.topic, y + 11, 13.5, "normal", 145);
   if (m.courseCode) y = centered("Course Code: " + m.courseCode, y + 11, 13.5, "normal", 145);
   if (m.courseTitle) y = centered("Course Title: " + m.courseTitle, y + (m.courseCode ? 7 : 11), 13.5, "normal", 145);
 
