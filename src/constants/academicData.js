@@ -1,60 +1,102 @@
-const departmentGroups = [
-  {
-    label: "Faculty Of Arts",
-    options: [
-      "Department Of Bangla",
-      "Department Of English",
-      "History and Archaeology"
-    ]
-  },
-  {
-    label: "Faculty Of Life And Earth Science",
-    options: [
-      "Department of Geography and Environmental Science",
-      "Department of Disaster Science and Management"
-    ]
-  },
-  {
-    label: "Faculty Of Science",
-    options: [
-      "Department of Mathematics",
-      "Department of Statistics",
-      "Department of Physics",
-      "Department of Chemistry"
-    ]
-  },
-  {
-    label: "Faculty Of Engineering And Technology",
-    options: [
-      "Department of Computer Science and Engineering",
-      "Department of Electrical and Electronic Engineering"
-    ]
-  },
-  {
-    label: "Faculty Of Social Sciences",
-    options: [
-      "Department of Economics",
-      "Department of Political Science",
-      "Department of Sociology",
-      "Department of Gender and Development Studies",
-      "Department of Mass Communication and Journalism",
-      "Department of Public Administration"
-    ]
-  },
-  {
-    label: "Faculty Of Business Studies",
-    options: [
-      "Department of Management Studies",
-      "Department of Marketing",
-      "Department of Accounting and Information Systems",
-      "Department of Finance and Banking",
-      "Department of Management Information Systems(MIS)"
-    ]
-  }
+export const UNI = "Begum Rokeya University, Rangpur";
+export const LOGO_PATH = "/assets/brur-logo.png";
+export const LOGO_RATIO = 1.0;
+
+export const DEPTS = {
+  "Faculty of Engineering and Technology": [
+    "Department of Computer Science and Engineering",
+    "Department of Electrical and Electronic Engineering"
+  ],
+  "Faculty of Science": [
+    "Department of Mathematics",
+    "Department of Statistics",
+    "Department of Physics",
+    "Department of Chemistry"
+  ],
+  "Faculty of Business Studies": [
+    "Department of Management Studies",
+    "Department of Marketing",
+    "Department of Accounting and Information Systems",
+    "Department of Finance and Banking",
+    "Department of Management Information Systems"
+  ],
+  "Faculty of Social Science": [
+    "Department of Economics",
+    "Department of Political Science",
+    "Department of Sociology",
+    "Department of Gender and Development Studies",
+    "Department of Mass Communication and Journalism",
+    "Department of Public Administration"
+  ],
+  "Faculty of Arts": [
+    "Department of Bangla",
+    "Department of English",
+    "Department of History and Archaeology"
+  ],
+  "Faculty of Life and Earth Science": [
+    "Department of Geography and Environmental Science",
+    "Department of Disaster Science and Management"
+  ]
+};
+
+export const FACULTIES = Object.keys(DEPTS);
+
+export const DOC_TYPES = [
+  "Assignment",
+  "Lab Report",
+  "Project Report",
+  "Term Paper",
+  "Presentation",
+  "Thesis",
+  "Other"
 ];
 
-const teacherData = {
-  "Department Of Bangla": [
+export const TEACHER_DESIGNATIONS = [
+  "Professor",
+  "Associate Professor",
+  "Assistant Professor",
+  "Lecturer",
+  "Other"
+];
+
+export const SEMESTERS = [
+  "1st Year 1st Semester",
+  "1st Year 2nd Semester",
+  "2nd Year 1st Semester",
+  "2nd Year 2nd Semester",
+  "3rd Year 1st Semester",
+  "3rd Year 2nd Semester",
+  "4th Year 1st Semester",
+  "4th Year 2nd Semester",
+  "Other"
+];
+
+export const SESSIONS = [
+  "2019-2020",
+  "2020-2021",
+  "2021-2022",
+  "2022-2023",
+  "2023-2024",
+  "2024-2025",
+  "2025-2026",
+  "Other"
+];
+
+export const PROGRESS_KEYS = [
+  "faculty",
+  "dept",
+  "courseCode",
+  "courseTitle",
+  "tName",
+  "sName",
+  "sId",
+  "sReg",
+  "sSession",
+  "sSem"
+];
+
+export const TEACHER_DATA = {
+  "Department of Bangla": [
     "Dr. Sarifa Salowa Dina",
     "Prof. Dr. Syedul Hoque",
     "Dr. Parimal Chandra Barman",
@@ -66,7 +108,7 @@ const teacherData = {
     "Md. Golam Rabbani",
     "Monir Hossain"
   ],
-  "Department Of English": [
+  "Department of English": [
     "Md. Ali Rayhan Sarker",
     "Asif Al Matin",
     "Dr. Mohsina Ahsan",
@@ -78,7 +120,7 @@ const teacherData = {
     "Emrana Bari",
     "Farhana Mahzabin"
   ],
-  "History and Archaeology": [
+  "Department of History and Archaeology": [
     "Md. Golam Rabbani",
     "Ara Tanzia",
     "Dr. Md. Moniruzzaman",
@@ -282,7 +324,7 @@ const teacherData = {
     "Nusrat Jahan Sadia",
     "Tanvir Hasan Anik"
   ],
-  "Department of Management Information Systems(MIS)": [
+  "Department of Management Information Systems": [
     "S. M. Ashraful Alam",
     "Samsul Alam",
     "Somaya Tabassum",
@@ -293,7 +335,7 @@ const teacherData = {
   "Department of Computer Science and Engineering": [
     "Prof. Dr. Abu Kalam Md. Farid Uddin",
     "Dr. Md. Mizanur Rahman",
-    "Dr. Ileas Pramanik",
+    "Dr. Iles Pramanik",
     "Dr. Prodip Kumar Sarker",
     "Md. Zasim Uddin",
     "Md. Shamsuzzaman",
@@ -317,3 +359,22 @@ const teacherData = {
     "Bipanko Kumar Mondal"
   ]
 };
+
+export function getTeachersForDept(deptName) {
+  if (!deptName) return [];
+
+  if (TEACHER_DATA[deptName]) {
+    return TEACHER_DATA[deptName];
+  }
+
+  const cleanName = deptName.replace(/\s*\([^)]*\)/g, "").trim().toLowerCase();
+
+  for (const [key, list] of Object.entries(TEACHER_DATA)) {
+    const cleanKey = key.replace(/\s*\([^)]*\)/g, "").trim().toLowerCase();
+    if (cleanKey === cleanName || cleanKey.includes(cleanName) || cleanName.includes(cleanKey)) {
+      return list;
+    }
+  }
+
+  return [];
+}

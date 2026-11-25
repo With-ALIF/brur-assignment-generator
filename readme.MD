@@ -1,63 +1,98 @@
-# BRUR Assignment Cover Page Generator
+# BRUR Assignment & Report Cover Page Generator (React + Vite)
 
-A simple web-based tool to generate a professional assignment cover page for Begum Rokeya University, Rangpur (BRUR).  
-It allows students to enter their assignment details and instantly generate a print-ready A4 cover page.
+A modern, responsive web application built with **React** and **Vite** to generate professional, print-ready cover pages for Begum Rokeya University, Rangpur (BRUR).
+
+It features a tabbed wizard form, live interactive A4 paper preview, vector-based PDF generation (with 3cm binding margin support), and localStorage auto-save.
+
+---
 
 ## Features
 
-- Clean and professional BRUR-style design
-- Responsive form for all devices
-- Automatic preview of the cover page
-- Individual **or** Group Project submissions (dynamic multiple students)
-- Save/reuse student details as templates (per student)
-- Print-ready A4 layout
-- PDF download using browser print
-- Mobile, tablet, and desktop friendly
-- No backend required
+- **Modern Glassmorphic UI:** Clean, polished design matching BRUR branding with smooth transitions.
+- **Tabbed Wizard Form:** 4 organized steps (Document, Academic, Teacher, and Student).
+- **Progress Tracking:** Live form completion indicator bar.
+- **Real-Time A4 Live Preview:** Interactive preview accurately rendered with A4 proportions and responsive scaling.
+- **3cm Left Binding Margin:** Dedicated toggle for 3cm (30mm) left margin for hole-punching and spiral binding.
+- **Crisp Vector PDF Export:** High-resolution vector PDF using `jsPDF` without blurry screenshot rasterization.
+- **Auto-Save & Restore:** Automatically saves form state to `localStorage` so input is never lost on refresh.
+- **Faculty & Department Mapping:** Automatically populates departments based on the chosen faculty, with support for custom inputs.
+- **No Backend Required:** 100% client-side application.
 
-## Technologies Used
+---
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
+## Project Structure
 
-## How to Use
+```
+brur-assignment-generator/
+├── public/
+│   └── assets/
+│       └── brur-logo.png            # BRUR official logo asset
+├── src/
+│   ├── components/
+│   │   ├── AcademicPanel.jsx        # Faculty and department selection
+│   │   ├── ActionButtons.jsx        # Download PDF and Reset controls
+│   │   ├── DocumentPanel.jsx        # Document type, topic, course details, 3cm margin
+│   │   ├── Footer.jsx               # Footer and credit info
+│   │   ├── FormCard.jsx             # Multi-tab form container with navigation
+│   │   ├── Header.jsx               # University title, branding, and logo
+│   │   ├── PreviewStage.jsx         # Live A4 paper preview with ResizeObserver
+│   │   ├── Progress.jsx             # Form completion bar
+│   │   ├── StudentPanel.jsx         # Student information and submission date
+│   │   ├── Tabs.jsx                 # Sliding indicator tab navigation
+│   │   ├── TeacherPanel.jsx         # Teacher details and designation
+│   │   └── Toast.jsx                # Animated toast notifications
+│   ├── constants/
+│   │   └── academicData.js          # BRUR faculties, departments, designations
+│   ├── styles/
+│   │   └── main.css                 # Glassmorphic, responsive, and A4 print styles
+│   ├── utils/
+│   │   ├── dateUtils.js             # Date formatting and ISO helpers
+│   │   ├── pdfGenerator.js          # jsPDF vector PDF engine & export logic
+│   │   └── storage.js               # LocalStorage state management
+│   ├── App.jsx                      # Main application component
+│   └── main.jsx                     # Vite React entry point
+├── index.html                       # HTML template with Google Fonts
+├── package.json                     # Project dependencies and npm scripts
+├── vite.config.js                   # Vite React plugin configuration
+└── .gitignore                       # Git ignore file
+```
 
-1. Open the project in your browser.
-2. Pick **Submitted By** — `Individual` or `Group Project`.
-3. In group mode, choose the number of students or click **+ Add Another Student** / **Remove**.
-4. Fill in the document information and teacher details.
-5. For each student card, either type the details or pick a saved template and click **Save** to store it for next time.
-6. Click **Download PDF**.
-7. The generated PDF is named after the student(s), e.g. `Assignment_Group_Alif_Rifat_Sadia.pdf`.
+---
 
+## Setup & Running Locally
 
-## Print Instructions
+### Prerequisites
+- Node.js (version 18 or higher recommended)
+- npm or yarn
 
-- Use browser print option (Ctrl + P)
-- Select **A4** paper size
-- Set margins to **Default** or **None**
-- Disable headers and footers
-- Enable background graphics (if available)
+### Installation
+```bash
+# Clone or navigate to the project directory
+cd brur-assignment-generator
 
-## Customization
+# Install dependencies
+npm install
+```
 
-You can easily customize:
-- Fonts and colors from `style.css`
-- Layout and spacing for print
-- Form fields in `index.html`
-- Dynamic behavior in `script.js`
+### Development Server
+```bash
+npm run dev
+```
+Open `http://localhost:5173/` in your browser.
 
-## Browser Support
+### Production Build
+```bash
+npm run build
+```
+The optimized production bundle will be generated in the `dist/` directory.
 
-- Google Chrome (recommended)
-- Microsoft Edge
-- Firefox
+### Preview Production Build
+```bash
+npm run preview
+```
 
-## License
-
-This project is open for educational and personal use.
+---
 
 ## Author
 
-Developed by **Alif**
+Developed by **Alif** · BRUR CSE 16
