@@ -4,7 +4,8 @@ const TABS = [
   { id: "t0", label: "Document" },
   { id: "t1", label: "Academic" },
   { id: "t2", label: "Teacher" },
-  { id: "t3", label: "Student" }
+  { id: "t3", label: "Student" },
+  { id: "t4", label: "Design" }
 ];
 
 export default function Tabs({ currentTab, onSelectTab }) {
@@ -40,7 +41,7 @@ export default function Tabs({ currentTab, onSelectTab }) {
   const handleKeyDown = (e) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
-      onSelectTab(Math.min(3, currentTab + 1));
+      onSelectTab(Math.min(4, currentTab + 1));
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
       onSelectTab(Math.max(0, currentTab - 1));

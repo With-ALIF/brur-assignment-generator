@@ -282,15 +282,22 @@ export default function StudentPanel({ formData, onChange, hidden, directionClas
 
           <div className="group-members-list-input">
             <div className="group-members-header">
-              <span className="group-members-title">
-                Group Members / Participants ({members.length})
-              </span>
+              <div className="group-members-title-wrap">
+                <span className="group-members-title">
+                  Group Members / Participants
+                </span>
+                <span className="members-count-badge">{members.length}</span>
+              </div>
               <button
                 type="button"
                 className="btn-add-member"
                 onClick={handleAddMember}
               >
-                + Add Participant
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add Participant</span>
               </button>
             </div>
 

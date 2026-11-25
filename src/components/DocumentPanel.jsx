@@ -78,7 +78,7 @@ export default function DocumentPanel({ formData, onChange, hidden, directionCla
             checked={formData.bindMargin}
             onChange={(e) => onChange("bindMargin", e.target.checked)}
           />
-          <span>1.5cm Left Margin for Binding / Punching (১.৫ সেমি বাম মার্জিন)</span>
+          <span>1.5cm Left Margin for Binding / Punching</span>
         </label>
       </div>
     </div>

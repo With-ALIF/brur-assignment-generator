@@ -3,20 +3,16 @@ import { LOGO_PATH } from "../constants/academicData";
 
 export default function Header() {
   return (
-    <header className="reveal">
-      <div className="logo-card">
-        <img
-          id="brandLogo"
-          src={LOGO_PATH}
-          className="brand-logo"
-          alt="BRUR Logo"
-        />
+    <header className="topbar reveal">
+      <div className="brand">
+        <div className="brand-mark">
+          <img src={LOGO_PATH} alt="BRUR university logo" />
+        </div>
+        <div className="brand-copy">
+          <div className="brand-title">BRUR Cover Studio</div>
+        </div>
       </div>
-      <div>
-        <span className="pill">BRUR Cover Page</span>
-        <h1>Begum Rokeya University, Rangpur</h1>
-        <p>Assignment &amp; Report Cover Page Generator with Live A4 Preview</p>
-      </div>
+      <div className="header-note">Free • All Departments • No Login Required</div>
     </header>
   );
 }

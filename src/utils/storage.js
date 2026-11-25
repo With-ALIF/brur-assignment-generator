@@ -31,6 +31,8 @@ export function getDefaultFormData() {
     sSessionCustom: "",
     sSem: "1st Year 1st Semester",
     sSemCustom: "",
+    coverTemplate: "classic",
+    coverColor: "#111111",
     date: todayISO()
   };
 }
@@ -52,6 +54,8 @@ export function loadFormData() {
       groupMembers: Array.isArray(parsed.groupMembers) && parsed.groupMembers.length > 0
         ? parsed.groupMembers
         : [{ name: parsed.sName || "", id: parsed.sId || "", reg: parsed.sReg || "" }],
+      coverTemplate: parsed.coverTemplate || "classic",
+      coverColor: parsed.coverColor || "#111111",
       date: parsed.date || defaults.date
     };
   } catch (err) {

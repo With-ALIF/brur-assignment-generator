@@ -32,6 +32,26 @@ export function typeLabel(formData) {
 
 export const rowText = (r) => (r.l ? r.l + ": " : "") + r.v;
 
+export function hexToRgb(hex) {
+  if (!hex) return [17, 17, 17];
+  const cleaned = hex.replace("#", "").trim();
+  if (cleaned.length === 3) {
+    return [
+      parseInt(cleaned[0] + cleaned[0], 16),
+      parseInt(cleaned[1] + cleaned[1], 16),
+      parseInt(cleaned[2] + cleaned[2], 16)
+    ];
+  }
+  if (cleaned.length === 6) {
+    return [
+      parseInt(cleaned.slice(0, 2), 16),
+      parseInt(cleaned.slice(2, 4), 16),
+      parseInt(cleaned.slice(4, 6), 16)
+    ];
+  }
+  return [17, 17, 17];
+}
+
 export function exportModel(formData) {
   const dept = formData.dept || "";
   const desig = formData.tDesig === "Other" ? formData.tDesigCustom : formData.tDesig;
@@ -116,7 +136,9 @@ export function exportModel(formData) {
     by: keep(byRows),
     date: prettyDate(formData.date),
     bindMargin: formData.bindMargin !== false,
-    isGroup: isGroup
+    isGroup: isGroup,
+    coverTemplate: formData.coverTemplate || "classic",
+    coverColor: formData.coverColor || "#111111"
   };
 }
 
@@ -130,10 +152,22 @@ export function buildPdf(m, logo, ratio = LOGO_RATIO) {
   const cx = bindMargin ? 108.5 : 105;
   const innerOffset = 2.2;
 
-  doc.setLineWidth(0.9);
-  doc.rect(leftX, 8, boxW, 281);
-  doc.setLineWidth(0.25);
-  doc.rect(leftX + innerOffset, 8 + innerOffset, boxW - innerOffset * 2, 281 - innerOffset * 2);
+  const [r, g, b] = hexToRgb(m.coverColor || "#111111");
+  const template = m.coverTemplate || "classic";
+
+  doc.setDrawColor(r, g, b);
+  if (template === "minimal") {
+    doc.setLineWidth(0.35);
+    doc.rect(leftX, 8, boxW, 281);
+  } else if (template === "modern") {
+    doc.setLineWidth(1.1);
+    doc.roundedRect(leftX, 8, boxW, 281, 2.5, 2.5, "S");
+  } else {
+    doc.setLineWidth(0.9);
+    doc.rect(leftX, 8, boxW, 281);
+    doc.setLineWidth(0.25);
+    doc.rect(leftX + innerOffset, 8 + innerOffset, boxW - innerOffset * 2, 281 - innerOffset * 2);
+  }
 
   const lh = 34, lw = lh * ratio;
   doc.addImage(logo, "PNG", cx - lw / 2, 16, lw, lh);
@@ -149,17 +183,20 @@ export function buildPdf(m, logo, ratio = LOGO_RATIO) {
 
   let y = centered(m.uni, 62, 22, "bold", 155);
   if (m.dept) y = centered(m.dept, y + 8.5, 14.5, "normal", 155);
-  y += 6;
-  doc.setLineWidth(0.25);
-  doc.line(cx - 53, y, cx + 53, y);
 
   doc.setFont("times", "bold");
   doc.setFontSize(20);
   const typeText = m.type.toUpperCase();
   const bw = Math.min(145, Math.max(70, doc.getTextWidth(typeText) + 22));
-  const top = y + 10;
-  doc.setLineWidth(0.6);
-  doc.rect(cx - bw / 2, top, bw, 14);
+  const top = y + 14;
+  doc.setDrawColor(r, g, b);
+  doc.setLineWidth(template === "minimal" ? 0.35 : 0.6);
+  if (template === "modern") {
+    doc.roundedRect(cx - bw / 2, top, bw, 14, 2, 2, "S");
+  } else {
+    doc.rect(cx - bw / 2, top, bw, 14);
+  }
+  doc.setTextColor(0, 0, 0);
   doc.text(typeText, cx, top + 9.6, { align: "center" });
   y = top + 14;
 
@@ -219,8 +256,8 @@ export function buildPdf(m, logo, ratio = LOGO_RATIO) {
   const boxTop = y + (m.isGroup && maxLines > 10 ? 12 : 16);
 
   const drawBox = (x, heading, rows, w, h) => {
-    doc.setDrawColor(0, 0, 0);
-    doc.setLineWidth(0.5);
+    doc.setDrawColor(r, g, b);
+    doc.setLineWidth(template === "minimal" ? 0.35 : 0.5);
     doc.roundedRect(x, boxTop, w, h, 2.5, 2.5, "S");
 
     doc.setFont("times", "bold");
@@ -244,6 +281,7 @@ export function buildPdf(m, logo, ratio = LOGO_RATIO) {
       const isBold = r.bold || r.l === "Name";
       doc.setFont("times", isBold ? "bold" : "normal");
       doc.setFontSize(fontSize);
+      doc.setTextColor(0, 0, 0);
 
       if (r.l) {
         const lbl = r.l + ": ";

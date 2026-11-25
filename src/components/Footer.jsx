@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer-accent"></div>
 
       <p className="footer-credit">
-        Crafted with <span className="heart">♥</span> by{" "}
+        Crafted with by{" "}
         <a
           href="https://alif.mnr.bd/"
           target="_blank"
@@ -18,11 +18,9 @@ export default function Footer() {
           Alif
         </a>
         <span className="footer-separator">·</span>
-        <span className="footer-dept-tag">BRUR CSE 16</span>
-      </p>
-
-      <p className="footer-note">
-        Vector PDF renders directly with exact margins (1.5cm left binding margin) for crisp print quality on standard A4 paper.
+        <a href="mailto:alifbrur16@gmail.com" className="footer-dept-tag">
+          alifbrur16@gmail.com
+        </a>
       </p>
 
       <div className="footer-bottom">

@@ -5,6 +5,7 @@ import DocumentPanel from "./DocumentPanel";
 import AcademicPanel from "./AcademicPanel";
 import TeacherPanel from "./TeacherPanel";
 import StudentPanel from "./StudentPanel";
+import DesignPanel from "./DesignPanel";
 
 export default function FormCard({ formData, onChange, completionPercent, onSeePreview, onNotify }) {
   const [currentTab, setCurrentTab] = useState(0);
@@ -17,7 +18,7 @@ export default function FormCard({ formData, onChange, completionPercent, onSeeP
   };
 
   const handleNext = () => {
-    if (currentTab < 3) {
+    if (currentTab < 4) {
       handleSelectTab(currentTab + 1);
     } else if (onSeePreview) {
       onSeePreview();
@@ -65,6 +66,13 @@ export default function FormCard({ formData, onChange, completionPercent, onSeeP
         onNotify={onNotify}
       />
 
+      <DesignPanel
+        formData={formData}
+        onChange={onChange}
+        hidden={currentTab !== 4}
+        directionClass={currentTab === 4 ? direction : ""}
+      />
+
       <div className="nav">
         <button
           type="button"
@@ -80,7 +88,7 @@ export default function FormCard({ formData, onChange, completionPercent, onSeeP
           className="primary"
           onClick={handleNext}
         >
-          {currentTab === 3 ? "See preview" : "Next"}
+          {currentTab === 4 ? "See preview" : "Next"}
         </button>
       </div>
     </form>

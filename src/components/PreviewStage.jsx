@@ -91,7 +91,7 @@ export default function PreviewStage({
           isBusy={isBusy}
         />
 
-        <p className="hint">Live A4 preview · Vector PDF export</p>
+        <p className="hint">Live A4 preview</p>
 
         <div
           className={`stage ${isReady ? "ready" : ""}`}
@@ -99,12 +99,15 @@ export default function PreviewStage({
           ref={actualStageRef}
         >
           <div
-            className={`paper ${isBind ? "bind-margin" : ""}`}
+            className={`paper ${isBind ? "bind-margin" : ""} tpl-${formData.coverTemplate || "classic"}`}
             id="paper"
             ref={paperRef}
+            style={{ "--cover-accent": formData.coverColor || "#111111" }}
           >
             <div className="frame"></div>
-            <div className="frame2"></div>
+            {formData.coverTemplate !== "minimal" && formData.coverTemplate !== "modern" && (
+              <div className="frame2"></div>
+            )}
             <div className="sheet">
               <img className="logo" alt="BRUR Logo" src={LOGO_PATH} />
               <div className="uni">{UNI}</div>
