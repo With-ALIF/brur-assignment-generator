@@ -59,16 +59,18 @@ export const TEACHER_DESIGNATIONS = [
   "Other"
 ];
 
-export const SEMESTERS = [
-  "1st Year 1st Semester",
-  "1st Year 2nd Semester",
-  "2nd Year 1st Semester",
-  "2nd Year 2nd Semester",
-  "3rd Year 1st Semester",
-  "3rd Year 2nd Semester",
-  "4th Year 1st Semester",
-  "4th Year 2nd Semester",
+export const YEARS = [
+  "1st Year",
+  "2nd Year",
+  "3rd Year",
+  "4th Year",
+  "Masters",
   "Other"
+];
+
+export const SEMESTERS = [
+  "1st Semester",
+  "2nd Semester"
 ];
 
 export const SESSIONS = [
@@ -92,7 +94,8 @@ export const PROGRESS_KEYS = [
   "sId",
   "sReg",
   "sSession",
-  "sSem"
+  "sYear",
+  "sSemester"
 ];
 
 export const TEACHER_DATA = {
@@ -333,7 +336,7 @@ export const TEACHER_DATA = {
     "Afsana Mimi"
   ],
   "Department of Computer Science and Engineering": [
-    "Prof. Dr. Abu Kalam Md. Farid Uddin",
+    "Prof. Dr. Abu Kalam Md. Farid Ul Islam",
     "Dr. Md. Mizanur Rahman",
     "Dr. Iles Pramanik",
     "Dr. Prodip Kumar Sarker",

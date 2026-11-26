@@ -29,6 +29,10 @@ export function getDefaultFormData() {
     sReg: "",
     sSession: "2023-2024",
     sSessionCustom: "",
+    sYear: "1st Year",
+    sYearCustom: "",
+    sSemester: "1st Semester",
+    sSemesterCustom: "",
     sSem: "1st Year 1st Semester",
     sSemCustom: "",
     coverTemplate: "classic",
@@ -48,6 +52,10 @@ export function loadFormData() {
     return {
       ...defaults,
       ...parsed,
+      sYear: parsed.sYear || (parsed.sSem?.match(/^(\d+(?:st|nd|rd|th)?\s+Year)/i)?.[1]) || defaults.sYear,
+      sYearCustom: parsed.sYearCustom || "",
+      sSemester: parsed.sSemester || (parsed.sSem?.match(/Year\s+(.+)$/i)?.[1]) || defaults.sSemester,
+      sSemesterCustom: parsed.sSemesterCustom || "",
       bindMargin: parsed.bindMargin !== undefined ? Boolean(parsed.bindMargin) : true,
       submissionType: parsed.submissionType || "individual",
       groupName: parsed.groupName || "",
@@ -56,7 +64,7 @@ export function loadFormData() {
         : [{ name: parsed.sName || "", id: parsed.sId || "", reg: parsed.sReg || "" }],
       coverTemplate: parsed.coverTemplate || "classic",
       coverColor: parsed.coverColor || "#111111",
-      date: parsed.date || defaults.date
+      date: parsed.date !== undefined ? parsed.date : defaults.date
     };
   } catch (err) {
     console.error("Failed to load saved form data:", err);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { SEMESTERS, SESSIONS } from "../constants/academicData";
+import { YEARS, SEMESTERS, SESSIONS } from "../constants/academicData";
+import { todayISO } from "../utils/dateUtils";
 import {
   getSavedStudentTemplates,
   saveStudentTemplate,
@@ -7,7 +8,8 @@ import {
 } from "../utils/storage";
 
 export default function StudentPanel({ formData, onChange, hidden, directionClass, onNotify }) {
-  const isSemOther = formData.sSem === "Other";
+  const isYearOther = formData.sYear === "Other";
+  const isSemOther = formData.sSemester === "Other";
   const isSessionOther = formData.sSession === "Other";
   const isGroup = formData.submissionType === "group";
 
@@ -35,8 +37,10 @@ export default function StudentPanel({ formData, onChange, hidden, directionClas
       reg: regToSave.trim(),
       session: formData.sSession || "2023-2024",
       sessionCustom: formData.sSessionCustom || "",
-      sem: formData.sSem || "1st Year 1st Semester",
-      semCustom: formData.sSemCustom || "",
+      year: formData.sYear || "1st Year",
+      yearCustom: formData.sYearCustom || "",
+      semester: formData.sSemester || "1st Semester",
+      semesterCustom: formData.sSemesterCustom || "",
       savedAt: new Date().toISOString()
     };
 
@@ -57,8 +61,16 @@ export default function StudentPanel({ formData, onChange, hidden, directionClas
       if (tpl.reg !== undefined) onChange("sReg", tpl.reg);
       if (tpl.session !== undefined) onChange("sSession", tpl.session);
       if (tpl.sessionCustom !== undefined) onChange("sSessionCustom", tpl.sessionCustom);
-      if (tpl.sem !== undefined) onChange("sSem", tpl.sem);
-      if (tpl.semCustom !== undefined) onChange("sSemCustom", tpl.semCustom);
+      if (tpl.year !== undefined) onChange("sYear", tpl.year);
+      if (tpl.yearCustom !== undefined) onChange("sYearCustom", tpl.yearCustom);
+      if (tpl.semester !== undefined) onChange("sSemester", tpl.semester);
+      if (tpl.semesterCustom !== undefined) onChange("sSemesterCustom", tpl.semesterCustom);
+      if (!tpl.year && tpl.sem) {
+        const yMatch = tpl.sem.match(/^(\d+(?:st|nd|rd|th)?\s+Year)/i);
+        if (yMatch) onChange("sYear", yMatch[1]);
+        const sMatch = tpl.sem.match(/Year\s+(.+)$/i);
+        if (sMatch) onChange("sSemester", sMatch[1]);
+      }
 
       if (isGroup) {
         const newMembers = [...members];
@@ -199,7 +211,7 @@ export default function StudentPanel({ formData, onChange, hidden, directionClas
                 className="template-select"
                 aria-label="Select saved student profile template"
               >
-                <option value="">-- Load Saved Profile ({templates.length}) --</option>
+                <option value="">Load Saved Profile ({templates.length})</option>
                 {templates.map((tpl) => (
                   <option key={tpl.id} value={tpl.id}>
                     {tpl.studentName ? `${tpl.studentName} (${tpl.studentId || "No ID"})` : (tpl.studentId || "Profile")}
@@ -405,11 +417,38 @@ export default function StudentPanel({ formData, onChange, hidden, directionClas
       )}
 
       <div className="field">
-        <label htmlFor="sSem">Year / Semester</label>
+        <label htmlFor="sYear">Year</label>
         <select
-          id="sSem"
-          value={formData.sSem}
-          onChange={(e) => onChange("sSem", e.target.value)}
+          id="sYear"
+          value={formData.sYear || "1st Year"}
+          onChange={(e) => onChange("sYear", e.target.value)}
+        >
+          {YEARS.map((y) => (
+            <option key={y} value={y}>
+              {y}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {isYearOther && (
+        <div className="field" id="sYearCustomWrap">
+          <label htmlFor="sYearCustom">Custom Year</label>
+          <input
+            id="sYearCustom"
+            placeholder="e.g. 5th Year or Masters"
+            value={formData.sYearCustom || ""}
+            onChange={(e) => onChange("sYearCustom", e.target.value)}
+          />
+        </div>
+      )}
+
+      <div className="field">
+        <label htmlFor="sSemester">Semester</label>
+        <select
+          id="sSemester"
+          value={formData.sSemester || "1st Semester"}
+          onChange={(e) => onChange("sSemester", e.target.value)}
         >
           {SEMESTERS.map((s) => (
             <option key={s} value={s}>
@@ -420,23 +459,42 @@ export default function StudentPanel({ formData, onChange, hidden, directionClas
       </div>
 
       {isSemOther && (
-        <div className="field" id="sSemCustomWrap">
-          <label htmlFor="sSemCustom">Custom Semester / Year</label>
+        <div className="field" id="sSemesterCustomWrap">
+          <label htmlFor="sSemesterCustom">Custom Semester</label>
           <input
-            id="sSemCustom"
-            placeholder="e.g. Masters 1st Semester"
-            value={formData.sSemCustom}
-            onChange={(e) => onChange("sSemCustom", e.target.value)}
+            id="sSemesterCustom"
+            placeholder="e.g. 3rd Semester or Final Semester"
+            value={formData.sSemesterCustom || ""}
+            onChange={(e) => onChange("sSemesterCustom", e.target.value)}
           />
         </div>
       )}
 
       <div className="field full">
-        <label htmlFor="date">Date of Submission</label>
+        <div className="date-label-row">
+          <label htmlFor="date">Date of Submission</label>
+          {formData.date ? (
+            <button
+              type="button"
+              className="btn-date-toggle"
+              onClick={() => onChange("date", "")}
+            >
+              Keep Blank
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn-date-toggle"
+              onClick={() => onChange("date", todayISO())}
+            >
+              Set Today
+            </button>
+          )}
+        </div>
         <input
           type="date"
           id="date"
-          value={formData.date}
+          value={formData.date || ""}
           onChange={(e) => onChange("date", e.target.value)}
         />
       </div>

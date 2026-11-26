@@ -34,7 +34,7 @@ export default function DesignPanel({ formData, onChange, hidden, directionClass
     >
       <div className="section">
         <h3 className="section-title">
-          <span className="section-number">05</span> Cover Design
+        Cover Design
         </h3>
 
         <div className="template-options" role="group" aria-label="Choose cover design">

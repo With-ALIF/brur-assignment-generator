@@ -53,20 +53,15 @@ export default function PreviewStage({
       ? formData.tDesigCustom
       : formData.tDesig;
 
-  const sSemDisplay =
-    formData.sSem === "Other"
-      ? formData.sSemCustom
-      : formData.sSem;
+  const yearDisplay =
+    formData.sYear === "Other"
+      ? formData.sYearCustom
+      : formData.sYear || (formData.sSem?.match(/^(\d+(?:st|nd|rd|th)?\s+Year)/i)?.[1]) || "";
 
-  let yearDisplay = "";
-  let semDisplay = sSemDisplay;
-  if (sSemDisplay) {
-    const match = sSemDisplay.match(/^(\d+(?:st|nd|rd|th)?\s+Year)\s+(.+)$/i);
-    if (match) {
-      yearDisplay = match[1];
-      semDisplay = match[2];
-    }
-  }
+  const semDisplay =
+    formData.sSemester === "Other"
+      ? formData.sSemesterCustom
+      : formData.sSemester || (formData.sSem?.match(/Year\s+(.+)$/i)?.[1]) || "";
 
   const isBind = formData.bindMargin !== false;
   const docTypeTitle = typeLabel(formData);
@@ -224,7 +219,12 @@ export default function PreviewStage({
               </div>
 
               <div className="date">
-                Date of Submission: {ph(dateFormatted, "Date")}
+                Date of Submission:{" "}
+                {dateFormatted ? (
+                  dateFormatted
+                ) : (
+                  <span className="date-blank" aria-label="Blank date space"></span>
+                )}
               </div>
             </div>
           </div>

@@ -55,17 +55,15 @@ export function hexToRgb(hex) {
 export function exportModel(formData) {
   const dept = formData.dept || "";
   const desig = formData.tDesig === "Other" ? formData.tDesigCustom : formData.tDesig;
-  const sem = formData.sSem === "Other" ? formData.sSemCustom : formData.sSem;
+  const yearVal =
+    formData.sYear === "Other"
+      ? formData.sYearCustom
+      : formData.sYear || (formData.sSem?.match(/^(\d+(?:st|nd|rd|th)?\s+Year)/i)?.[1]) || "";
 
-  let yearVal = "";
-  let semVal = sem;
-  if (sem) {
-    const match = sem.match(/^(\d+(?:st|nd|rd|th)?\s+Year)\s+(.+)$/i);
-    if (match) {
-      yearVal = match[1];
-      semVal = match[2];
-    }
-  }
+  const semVal =
+    formData.sSemester === "Other"
+      ? formData.sSemesterCustom
+      : formData.sSemester || (formData.sSem?.match(/Year\s+(.+)$/i)?.[1]) || "";
 
   const sessionVal =
     formData.sSession === "Other"
@@ -309,11 +307,22 @@ export function buildPdf(m, logo, ratio = LOGO_RATIO) {
   drawBox(box1X, "SUBMITTED BY", m.by, box1W, boxH);
   drawBox(box2X, "SUBMITTED TO", m.to, box2W, boxH);
 
+  doc.setFont("times", "normal");
+  doc.setFontSize(11.5);
+  const dateStr = m.date ? "Date of Submission: " + m.date : "Date of Submission:";
+  const textW = doc.getTextWidth(dateStr);
+  const dBoxW = m.date ? textW + 14 : textW + 34;
+  const dBoxH = 8.5;
+  const dBoxY = Math.min(269, Math.max(262, boxTop + boxH + 5));
+  const dBoxX = cx - dBoxW / 2;
+  doc.setDrawColor(r, g, b);
+  doc.setLineWidth(template === "minimal" ? 0.35 : 0.55);
+  doc.rect(dBoxX, dBoxY, dBoxW, dBoxH);
+  doc.setTextColor(0, 0, 0);
   if (m.date) {
-    doc.setFont("times", "normal");
-    doc.setFontSize(11.5);
-    const dateY = Math.min(273, Math.max(265, boxTop + boxH + 7));
-    doc.text("Date of Submission: " + m.date, cx, dateY, { align: "center" });
+    doc.text(dateStr, cx, dBoxY + 5.7, { align: "center" });
+  } else {
+    doc.text(dateStr, dBoxX + 7, dBoxY + 5.7);
   }
   return doc;
 }
